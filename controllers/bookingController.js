@@ -5,9 +5,7 @@ const sendEmail = require('../utils/sendEmail');
 const Jimp = require('jimp');
 const QrCodeReader = require('qrcode-reader');
 
-// @desc    Get all bookings for the logged-in user
-// @route   GET /api/bookings
-// @access  Protected (user)
+// Get all bookings for the logged-in user
 const getMyBookings = async (req, res, next) => {
   try {
     const bookings = await Booking.find({ user: req.user._id })
@@ -33,12 +31,9 @@ const getMyBookings = async (req, res, next) => {
   }
 };
 
-// @desc    Get a single booking (only if it belongs to the logged-in user)
-// @route   GET /api/bookings/:id
-// @access  Protected (user)
+// Get a single booking by ID (only if it belongs to the logged-in user)
 const getBookingById = async (req, res, next) => {
   try {
-    // Handle bonus validate route collision — skip if id is "validate"
     if (req.params.id === 'validate') return next();
 
     const booking = await Booking.findById(req.params.id)
@@ -65,9 +60,7 @@ const getBookingById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a new booking
-// @route   POST /api/bookings
-// @access  Protected (user)
+// Create a new booking for an event
 const createBooking = async (req, res, next) => {
   try {
     const { event: eventId, quantity } = req.body;
@@ -91,19 +84,19 @@ const createBooking = async (req, res, next) => {
       quantity: Number(quantity),
     });
  
-    // Update bookedSeats on the event atomically
+    // Update bookedSeats on the event automatically
     await Event.findByIdAndUpdate(eventId, {
       $inc: { bookedSeats: Number(quantity) },
     });
  
-    // --- Bonus: Generate QR Code ---
+   // Generate QR code for the booking
     const qrCode = await generateQrCode(booking);
     if (qrCode) {
       booking.qrCode = qrCode;
       await booking.save();
     }
  
-    // --- Bonus: Send confirmation email ---
+   // Send confirmation email with booking details 
     try {
       await sendEmail({
         to: req.user.email,
@@ -135,9 +128,7 @@ const createBooking = async (req, res, next) => {
   }
 };
 
-// @desc    Validate a booking via QR code (Bonus)
-// @route   GET /api/bookings/validate?qr=...
-// @access  Protected
+// Validate booking with qr code
 const validateBookingByQr = async (req, res, next) => {
   try {
     let { qrCode } = req.query;
@@ -147,7 +138,6 @@ const validateBookingByQr = async (req, res, next) => {
       return res.status(400).json({ valid: false, error: 'qrCode query parameter is required.' });
     }
  
-    // Find booking directly by qrCode stored in MongoDB
     const booking = await Booking.findOne({ qrCode })
       .populate('event', 'title date venue price category')
       .populate('user', 'name email');
@@ -172,9 +162,7 @@ const validateBookingByQr = async (req, res, next) => {
   }
 };
 
-// @desc    Admin: Get all events with their bookers (Bonus)
-// @route   GET /api/admin/dashboard
-// @access  Admin only
+// Admin dashboard: Get all events with booking details
 const adminDashboard = async (req, res, next) => {
   try {
     const events = await Event.find().sort({ date: 1 });

@@ -1,3 +1,4 @@
+// Validation middleware for creating and updating an event 
 const validateCreateEvent = (req, res, next) => {
   const { title, date, seatCapacity, price } = req.body;
   const errors = [];

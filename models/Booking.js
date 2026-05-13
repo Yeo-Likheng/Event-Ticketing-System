@@ -22,7 +22,7 @@ const bookingSchema = new mongoose.Schema(
       default: Date.now,
     },
     qrCode: {
-      type: String, // base64 string (bonus)
+      type: String, // Store qr Code asbase64 string 
     },
   },
   { timestamps: true }

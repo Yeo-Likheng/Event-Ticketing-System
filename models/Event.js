@@ -46,7 +46,6 @@ const eventSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Virtual for available seats
 eventSchema.virtual('availableSeats').get(function () {
   return this.seatCapacity - this.bookedSeats;
 });

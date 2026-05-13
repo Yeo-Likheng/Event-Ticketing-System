@@ -1,3 +1,4 @@
+// Validation middleware for creating a booking 
 const validateCreateBooking = (req, res, next) => {
   const { event, quantity } = req.body;
   const errors = [];

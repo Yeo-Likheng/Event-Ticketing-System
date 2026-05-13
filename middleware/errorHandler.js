@@ -1,4 +1,4 @@
-// 404 handler for unmatched routes
+// 404 handler for invalid routes
 const notFound = (req, res, next) => {
   return res.status(404).send(`
     <!DOCTYPE html>
@@ -21,7 +21,7 @@ const notFound = (req, res, next) => {
     </html>
   `);
 }
-// Global error handler
+// Error handler
 const errorHandler = (err, req, res, next) => {
   console.error('Error:', err.message);
 

@@ -15,12 +15,12 @@ connectDB();
 
 const app = express();
 
-// ─── Core Middleware ───────────────────────────────────────────────────────────
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// ─── Root HTML Welcome Page ────────────────────────────────────────────────────
+// Welcome page for default route
 app.get('/', (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -74,7 +74,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-// ─── API Routes ────────────────────────────────────────────────────────────────
+// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/bookings', bookingRoutes);

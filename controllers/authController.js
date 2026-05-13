@@ -1,9 +1,7 @@
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 
-// @desc    Register a new user
-// @route   POST /api/auth/register
-// @access  Public
+// Controller to register new user
 const register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
@@ -13,7 +11,7 @@ const register = async (req, res, next) => {
       return res.status(409).json({ error: 'An account with this email already exists.' });
     }
 
-    // Prevent self-assigning admin role via API
+    // Prevent self assigning admin role through API
     const safeRole = role === 'admin' ? 'user' : role;
 
     const user = await User.create({ name, email, password, role: safeRole });
@@ -35,9 +33,7 @@ const register = async (req, res, next) => {
   }
 };
 
-// @desc    Login a user
-// @route   POST /api/auth/login
-// @access  Public
+// Controller to login user
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;

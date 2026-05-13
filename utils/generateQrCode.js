@@ -1,10 +1,7 @@
 const QRCode = require('qrcode');
 
-/**
- * Generate a base64 QR code string from booking data.
- * @param {object} bookingData - The booking info to encode.
- * @returns {Promise<string>} Base64-encoded QR code image.
- */
+
+// Generate a base64 QR code string from booking data.
 const generateQrCode = async (bookingData) => {
   try {
     const payload = JSON.stringify({

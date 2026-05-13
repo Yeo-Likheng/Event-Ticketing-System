@@ -1,9 +1,7 @@
 const Event = require('../models/Event');
 const Booking = require('../models/Booking');
 
-// @desc    Get all events (with optional filters)
-// @route   GET /api/events
-// @access  Public
+// Get all events in the database
 const getEvents = async (req, res, next) => {
   try {
     const filter = {};
@@ -29,9 +27,7 @@ const getEvents = async (req, res, next) => {
   }
 };
 
-// @desc    Get single event by ID
-// @route   GET /api/events/:id
-// @access  Public
+// Get a single event by ID
 const getEventById = async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -44,9 +40,7 @@ const getEventById = async (req, res, next) => {
   }
 };
 
-// @desc    Create a new event
-// @route   POST /api/events
-// @access  Admin only
+// Create a new event
 const createEvent = async (req, res, next) => {
   try {
     const event = await Event.create(req.body);
@@ -56,9 +50,7 @@ const createEvent = async (req, res, next) => {
   }
 };
 
-// @desc    Update an event
-// @route   PUT /api/events/:id
-// @access  Admin only
+// Update an existing event
 const updateEvent = async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -66,7 +58,7 @@ const updateEvent = async (req, res, next) => {
       return res.status(404).json({ error: 'Event not found.' });
     }
 
-    // Prevent reducing seatCapacity below bookedSeats
+    // Prevent updating seatCapacity below bookedSeats
     if (
       req.body.seatCapacity !== undefined &&
       Number(req.body.seatCapacity) < event.bookedSeats
@@ -91,9 +83,7 @@ const updateEvent = async (req, res, next) => {
   }
 };
 
-// @desc    Delete an event
-// @route   DELETE /api/events/:id
-// @access  Admin only
+// Delete an event only if it has no bookings
 const deleteEvent = async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id);

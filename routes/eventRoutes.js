@@ -10,19 +10,19 @@ const {
 const { protect, adminOnly } = require('../middleware/auth');
 const { validateCreateEvent, validateUpdateEvent } = require('../validators/eventValidators');
 
-// GET /api/events          (public, supports ?category= and ?date=)
+// Routes get all events
 router.get('/', getEvents);
 
-// GET /api/events/:id      (public)
+// Routes to get event by ID
 router.get('/:id', getEventById);
 
-// POST /api/events         (admin only)
+// Routes to create a new event with admin accesss only
 router.post('/', protect, adminOnly, validateCreateEvent, createEvent);
 
-// PUT /api/events/:id      (admin only)
+// Routes to update an existing event with admin only access
 router.put('/:id', protect, adminOnly, validateUpdateEvent, updateEvent);
 
-// DELETE /api/events/:id   (admin only)
+// Routes to delete an event with admin only access
 router.delete('/:id', protect, adminOnly, deleteEvent);
 
 module.exports = router;

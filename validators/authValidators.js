@@ -1,3 +1,4 @@
+// Validation middleware for user registration and login
 const validateRegister = (req, res, next) => {
   const { name, email, password } = req.body;
   const errors = [];

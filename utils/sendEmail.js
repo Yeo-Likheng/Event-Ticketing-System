@@ -1,9 +1,6 @@
 const nodemailer = require('nodemailer');
 
-/**
- * Send a booking confirmation email.
- * @param {object} options - { to, subject, html }
- */
+// Send an email for booking confirmations using nodemailer 
 const sendEmail = async ({ to, subject, html }) => {
   if (
     !process.env.EMAIL_HOST ||
