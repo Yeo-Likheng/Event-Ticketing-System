@@ -4,9 +4,8 @@ const sendEmail = async ({ to, subject, html }) => {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.sendgrid.net',
-      port: 587,
-      secure: false,
-      requireTLS: true,
+      port: 465,
+      secure: true,
 
       auth: {
         user: 'apikey',
