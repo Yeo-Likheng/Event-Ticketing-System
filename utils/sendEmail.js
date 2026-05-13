@@ -4,8 +4,9 @@ const sendEmail = async ({ to, subject, html }) => {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false,
+      requireTLS: true,
       family: 4,
 
       auth: {
@@ -13,9 +14,9 @@ const sendEmail = async ({ to, subject, html }) => {
         pass: process.env.EMAIL_PASS,
       },
 
-      connectionTimeout: 20000,
-      greetingTimeout: 20000,
-      socketTimeout: 20000,
+      connectionTimeout: 30000,
+      greetingTimeout: 30000,
+      socketTimeout: 30000,
     });
 
     await transporter.sendMail({
