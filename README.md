@@ -4,7 +4,7 @@ A REST API for an event ticketing system built with Node.js, Express, MongoDB, a
 
 ---
 ## IMPORTANT
-Nodemailer is not working in render or deployment so I comment the code out for deployment but it works perfectly fine in the local server which is localhost:3000
+Nodemailer is not working in render or deployment so I comment the code out for deployment but it works perfectly fine in the local server which is localhost:3000. Before using start the server at by enter the deploy url and wait for a bit for the server to fully start in order to use it.
 
 ## Installation
 
