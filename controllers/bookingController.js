@@ -97,6 +97,7 @@ const createBooking = async (req, res, next) => {
     }
  
    // Send confirmation email with booking details 
+   /*
     try {
       await sendEmail({
         to: req.user.email,
@@ -118,6 +119,7 @@ const createBooking = async (req, res, next) => {
     } catch (emailErr) {
       console.warn('Email send failed (non-critical):', emailErr.message);
     }
+    */
  
     await booking.populate('event', 'title date venue price seatCapacity bookedSeats');
     const populated = await booking.populate('user', 'name email');
