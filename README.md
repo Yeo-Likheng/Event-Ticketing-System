@@ -3,13 +3,14 @@
 A REST API for an event ticketing system built with Node.js, Express, MongoDB, and JWT authentication. Users can register, browse events, and book tickets. Admins can create, update, and delete events.
 
 ---
+## IMPORTANT
+Nodemailer is not working in render or deployment so I comment the code out for deployment but it works perfectly fine in the local server which is localhost:3000
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/event-ticketing.git
-cd event-ticketing
+git clone https://github.com/Yeo-Likheng/Event-Ticketing-System
 ```
 
 2. Install dependencies:
@@ -51,7 +52,7 @@ Example `.env`:
 ```
 PORT=3000
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/event-ticketing
-JWT_SECRET=yoursupersecretkey
+JWT_SECRET=yoursecretkeyhere
 JWT_EXPIRES_IN=7d
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
@@ -80,8 +81,7 @@ API root: `http://localhost:3000/api`
 
 ## Deployed API
 
-> https://your-project-name.onrender.com
-
+> https://event-ticketing-system-jtl2.onrender.com
 ---
 
 ## Endpoint List
@@ -99,8 +99,8 @@ API root: `http://localhost:3000/api`
 |---|---|---|---|
 | GET | `/api/events` | Get all events | No |
 | GET | `/api/events?category=music` | Filter events by category | No |
-| GET | `/api/events?date=2025-12-25` | Filter events by date | No |
-| GET | `/api/events?category=music&date=2025-12-25` | Filter by both | No |
+| GET | `/api/events?date=2026-5-25` | Filter events by date | No |
+| GET | `/api/events?category=music&date=2026-5-25` | Filter by both | No |
 | GET | `/api/events/:id` | Get a single event | No |
 | POST | `/api/events` | Create a new event | Admin |
 | PUT | `/api/events/:id` | Update an event | Admin |
